@@ -1,0 +1,56 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Trip {
+  id                    String    @id @default(uuid())
+  taxi_type             TaxiType
+  vendor_id             Int
+  vendor                Vendor    @relation(fields: [vendor_id], references: [id])
+  pickup_datetime       DateTime?
+  dropoff_datetime      DateTime?
+  store_and_fwd_flag    String?
+  ratecode_id           Int?
+  rateCode              RateCode? @relation(fields: [ratecode_id], references: [id])
+  puLocation_id         Int
+  doLocation_id         Int
+  passenger_count       Int
+  trip_distance         Float
+  fare_amount           Float
+  extra                 Float
+  mta_tax               Float
+  tip_amount            Float
+  tolls_amount          Float
+  ehail_fee             Float? // Nullable
+  improvement_surcharge Float
+  total_amount          Float
+  payment_type          Int
+  trip_type             Int?
+  congestion_surcharge  Float
+  duration_minutes      Int?
+}
+
+enum TaxiType {
+  Yellow
+  Green
+}
+
+model Vendor {
+  id   Int    @id @default(autoincrement())
+  name String
+  Trip Trip[]
+}
+
+model RateCode {
+  id   Int    @id @default(autoincrement())
+  name String
+  Trip Trip[]
+}
