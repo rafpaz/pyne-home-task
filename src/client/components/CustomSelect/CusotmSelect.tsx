@@ -16,12 +16,12 @@ interface CustomSelectProps {
   selectLabel: string;
 }
 
-const CustomSelect: React.FC<CustomSelectProps> = ({
+const CustomSelect = ({
   onValueChange,
   placeholder,
   selectLabel,
   values,
-}) => (
+}: CustomSelectProps) => (
   <Select onValueChange={onValueChange}>
     <SelectTrigger className="w-[180px]">
       <SelectValue placeholder={placeholder} />
