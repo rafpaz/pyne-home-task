@@ -2,9 +2,11 @@ import { TaxiType } from "@prisma/client";
 import { SummaryQuery } from "@server/validators/summaryQueryValidator";
 import { createStore } from "zustand-x";
 
+export type TaxiTypeOrAll = TaxiType | "all";
+
 interface Filters {
   vendorId: string | null;
-  taxiType: TaxiType | null;
+  taxiType: TaxiTypeOrAll | null;
   currency: SummaryQuery["currency"] | null;
   distanceUnit: SummaryQuery["distanceUnit"] | null;
 }

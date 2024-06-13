@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import useBuildQueryParams from "./useBuildQueryParams";
 import axios from "axios";
 
-interface Summary {
+export interface Summary {
   prices: {
     fare_amount: number;
     tip_amount: number;
@@ -18,19 +18,22 @@ interface Summary {
 
 const useFetchData = () => {
   const [data, setData] = useState<Summary | null>(null);
+  const [loading, setLoading] = useState(true);
   const queryParams = useBuildQueryParams();
 
   useEffect(() => {
     async function fetchData() {
+      setLoading(true);
       const result = await axios.get(
         `${import.meta.env.VITE_ENDPOINT}/summary${queryParams ? "?" + queryParams : ""}`
       );
       setData(result.data);
+      setLoading(false);
     }
     fetchData();
   }, [queryParams]);
 
-  return data;
+  return { loading, data };
 };
 
 export default useFetchData;

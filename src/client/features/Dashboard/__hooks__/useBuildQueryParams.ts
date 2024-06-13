@@ -7,8 +7,8 @@ const useBuildQueryParams = () => {
   const distanceUnit = filtersStore.use.distanceUnit();
 
   return new URLSearchParams({
-    ...(vendorId && { vendorId }),
-    ...(taxiType && { taxiType }),
+    ...(vendorId && vendorId !== "all" && { vendorId }),
+    ...(taxiType && taxiType !== "all" && { taxiType }),
     ...(currency && { currency }),
     ...(distanceUnit && { distanceUnit }),
   }).toString();
