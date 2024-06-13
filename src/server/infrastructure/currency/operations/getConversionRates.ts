@@ -15,11 +15,9 @@ export interface ConversionRates {
 const getConversionRates = async (
   baseCurrency: string = "USD"
 ): Promise<ConversionRates["conversion_rates"]> => {
-  console.log("before");
   const response = await axios.get<ConversionRates>(
-    `https://v6.exchangerate-api.com/v6/3432b30c0ba6974a53bc4a66/latest/${baseCurrency}`
+    `${process.env.CURRENCY_URL}/${baseCurrency}`
   );
-  console.log("after");
 
   return response.data.conversion_rates;
 };
