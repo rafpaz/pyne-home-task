@@ -10,7 +10,6 @@
     "dev": "concurrently \"npm run be:dev\" \"npm run fe:dev\"",
     "build": "vite build",
     "seed": "tsx src/scripts/seed.ts",
-    "test": "tsx src/scripts/test.ts",
     "migrate": "prisma migrate dev"
   },
   "dependencies": {
